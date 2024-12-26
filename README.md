@@ -5,7 +5,7 @@ A minimal, robust C++ build system using CMake, ccache, and ninja for optimal pe
 ## Requirements
 
 - CMake 3.28+
-- C++20 compiler (Clang)
+- C++20 compiler
 - ccache (installed automatically)
 - ninja (installed automatically)
 - lld linker (installed automatically)
