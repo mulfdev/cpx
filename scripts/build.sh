@@ -4,12 +4,12 @@ set -e
 # Get build type from argument, default to Debug
 BUILD_TYPE=${1:-Debug}
 
-# Install ccache if not present (platform-specific)
+# Platform-specific ccache and ninja installation
 if ! command -v ccache &> /dev/null; then
-    if command -v apt-get &> /dev/null; then
-        sudo apt-get update && sudo apt-get install -y ccache ninja-build
-    elif command -v brew &> /dev/null; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
         brew install ccache ninja
+    elif command -v apt-get &> /dev/null; then
+        sudo apt-get update && sudo apt-get install -y ccache ninja-build
     elif command -v pacman &> /dev/null; then
         sudo pacman -Sy ccache ninja
     elif command -v dnf &> /dev/null; then
@@ -32,7 +32,7 @@ if command -v ninja &> /dev/null; then
     cmake --build .
 else
     cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-    cmake --build . -j$(nproc)
+    cmake --build .
 fi
 
 # Show ccache statistics after build
