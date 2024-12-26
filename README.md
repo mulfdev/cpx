@@ -1,4 +1,4 @@
-# C++ Project Build System
+# CPX - C++ Build System
 
 A minimal, robust C++ build system using CMake, ccache, and ninja for optimal performance.
 
